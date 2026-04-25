@@ -1,37 +1,38 @@
 import React from 'react'
+import { FilePlus, TrendingUp, ArrowLeftRight, CreditCard, Eye, ShieldCheck, Fuel, Plane, ParkingSquare, Banknote, Building2, Home, QrCode, Wallet, MapPin, Gift, Search, ShoppingCart, Sparkles, Goal, Sprout } from 'lucide-react'
 import './PhoneFrame.css'
 import './TngHomePage.css'
 
 const quickActions = [
-  { icon: '▤', label: 'Apply' },
-  { icon: '◔', label: 'Cash flow' },
-  { icon: '△', label: 'Transfer' },
-  { icon: '▭', label: 'Cards' },
+  { icon: <FilePlus size={20} />, label: 'Apply' },
+  { icon: <TrendingUp size={20} />, label: 'Cash flow' },
+  { icon: <ArrowLeftRight size={20} />, label: 'Transfer' },
+  { icon: <CreditCard size={20} />, label: 'Cards' },
 ]
 
 const recommended = [
-  { icon: '▱', label: 'CardMatch', tag: 'NEW' },
+  { icon: <CreditCard size={22} />, label: 'CardMatch', tag: 'NEW' },
   { icon: '25', label: 'Payday', tag: '$$ IN' },
-  { icon: '☂', label: 'Travel' },
+  { icon: <Plane size={22} />, label: 'Travel' },
   { icon: '淘', label: 'Taobao', orange: true },
 ]
 
 const favourites = [
-  { icon: 'P', label: 'Street Parking' },
-  { icon: '🏃', label: 'Goal City' },
-  { icon: '$', label: 'CashLoan', tag: 'NAK$$' },
+  { icon: <ParkingSquare size={22} />, label: 'Street Parking' },
+  { icon: <Goal size={22} />, label: 'Goal City' },
+  { icon: <Banknote size={22} />, label: 'CashLoan', tag: 'NAK$$' },
   { icon: 'ctos', label: 'CTOS Report' },
   { icon: 'ASNB', label: 'ASNB' },
   { icon: '+60', label: 'MY Prepaid' },
-  { icon: '⌂', label: 'My Business' },
+  { icon: <Building2 size={22} />, label: 'My Business' },
 ]
 
 const bottomNav = [
-  { icon: '⌂', label: 'Home', active: true },
-  { icon: '🛒', label: 'eShop' },
-  { icon: '▣', label: '', center: true },
-  { icon: '$', label: 'GOFinance' },
-  { icon: '⌖', label: 'Near Me' },
+  { icon: <Home size={20} />, label: 'Home', active: true },
+  { icon: <ShoppingCart size={20} />, label: 'eShop' },
+  { icon: <QrCode size={24} />, label: '', center: true },
+  { icon: <Wallet size={20} />, label: 'GOFinance' },
+  { icon: <MapPin size={20} />, label: 'Near Me' },
 ]
 
 export default function TngHomePage({ onOpenGoAura, routeAnimation = '' }) {
@@ -52,7 +53,7 @@ export default function TngHomePage({ onOpenGoAura, routeAnimation = '' }) {
         <section className="tng-blue">
           <div className="tng-top-row">
             <button className="trip-pill">China Trip <span>🏮</span></button>
-            <div className="search-pill"><span>⌕</span> BUDI95</div>
+            <div className="search-pill"><span><Search size={18} /></span><span className="search-pill-text">BUDI95</span></div>
             <div className="profile-bubble">
               <span className="profile-dot" />
               <span className="coin-dot" />
@@ -62,9 +63,9 @@ export default function TngHomePage({ onOpenGoAura, routeAnimation = '' }) {
           <div className="wallet-row">
             <div>
               <div className="balance-line">
-                <span className="shield">⌬</span>
+                <span className="shield"><ShieldCheck size={16} /></span>
                 <span>RM 77.00</span>
-                <span className="eye">◉</span>
+                <span className="eye"><Eye size={16} /></span>
               </div>
               <div className="asset-link">View asset details ›</div>
             </div>
@@ -78,7 +79,7 @@ export default function TngHomePage({ onOpenGoAura, routeAnimation = '' }) {
           <div className="quick-tray">
             {quickActions.map(action => (
               <button key={action.label} className="quick-action">
-                <span>{action.icon}</span>
+                <span className="quick-action-icon">{action.icon}</span>
                 {action.label}
               </button>
             ))}
@@ -88,37 +89,41 @@ export default function TngHomePage({ onOpenGoAura, routeAnimation = '' }) {
         <main className="tng-scroll">
           <section className="promo-grid">
             <button className="goaura-home-button" onClick={onOpenGoAura}>
-              <span className="goaura-badge">AI</span>
+              <span className="goaura-badge"><Sparkles size={15} /></span>
               <strong>GOAura HyperPersonal</strong>
               <small>Explore benefits now</small>
             </button>
 
-            <div className="soft-card grow-card">
-              <span className="round-illustration">RM</span>
-              <div>
+            <div className="promo-card grow-card">
+              <span className="promo-icon grow-icon"><Sprout size={20} /></span>
+              <div className="promo-text">
                 <strong>Grow your money</strong>
                 <small>Start with just RM10</small>
               </div>
             </div>
 
-            <div className="soft-card fuel-card">
-              <div className="fuel-brand">BUDI95</div>
-              <small>RON95 at RM1.99</small>
-              <div className="fuel-bottom">
-                <div>
-                  <span>Fuel balance</span>
-                  <strong>166 litres</strong>
-                </div>
-                <span className="fuel-ring">▯</span>
+            <div className="promo-card budi-card">
+              <span className="promo-icon budi-icon"><Fuel size={18} /></span>
+              <div className="promo-text">
+                <strong>BUDI95</strong>
+                <small>RON95 at RM1.99</small>
               </div>
             </div>
 
-            <div className="soft-card reward-card">
-              <span className="gift-icon">✦</span>
-              <div>
+            <div className="promo-card reward-card">
+              <span className="promo-icon gift-icon"><Gift size={20} /></span>
+              <div className="promo-text">
                 <strong>GOrewards</strong>
-                <button>Join now</button>
+                <small className="reward-sub">Join now</small>
               </div>
+            </div>
+
+            <div className="promo-card fuel-balance-card">
+              <div className="promo-text">
+                <small>Fuel balance</small>
+                <strong>166 litres</strong>
+              </div>
+              <span className="fuel-ring"><Fuel size={14} color="#0871ee" /></span>
             </div>
           </section>
 

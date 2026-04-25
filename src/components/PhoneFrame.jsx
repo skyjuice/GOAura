@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Home, ShoppingCart, QrCode, Wallet, MapPin } from 'lucide-react'
 import HomeScreen from './HomeScreen.jsx'
 import CoachScreen from './CoachScreen.jsx'
 import BenefitsScreen from './BenefitsScreen.jsx'
@@ -17,11 +18,11 @@ const TABS = [
 ]
 
 const APP_NAV = [
-  { icon: '⌂', label: 'Home', action: 'home' },
-  { icon: '🛒', label: 'eShop' },
-  { icon: '⌂', label: '', action: 'home', center: true, active: true },
-  { icon: '$', label: 'GOFinance', action: 'finance' },
-  { icon: '⌖', label: 'Near Me' },
+  { icon: <Home size={20} />,         label: 'Home',      action: 'home' },
+  { icon: <ShoppingCart size={20} />, label: 'eShop' },
+  { icon: <QrCode size={24} />,       label: '',          action: 'home', center: true, active: true },
+  { icon: <Wallet size={20} />,       label: 'GOFinance', action: 'finance' },
+  { icon: <MapPin size={20} />,       label: 'Near Me' },
 ]
 
 export default function PhoneFrame({ persona, routeAnimation = '', onHome }) {
@@ -136,7 +137,7 @@ export default function PhoneFrame({ persona, routeAnimation = '', onHome }) {
         <nav className="tng-nav goaura-app-nav">
           {APP_NAV.map(item => (
             <button
-              key={`${item.icon}-${item.label || item.action}`}
+              key={`${item.label || item.action}`}
               className={`tng-nav-btn ${item.active ? 'active' : ''} ${item.center ? 'center' : ''}`}
               onClick={() => handleAppNav(item.action)}
               aria-label={item.label || 'Go back to homepage'}

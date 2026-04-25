@@ -89,8 +89,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3px;
-  min-height: 31px;
+  gap: 5px;
+  height: 31px;
+  padding: 0 12px;
   border: 1px solid rgba(255,255,255,0.8);
   border-radius: 999px;
   background: linear-gradient(135deg, #ff856d, #ff6076);
@@ -98,11 +99,14 @@
   font-size: 12px;
   font-weight: 800;
   box-shadow: inset 0 -8px 16px rgba(255,255,255,0.16);
+  white-space: nowrap;
 }
 
 .trip-pill span {
-  font-size: 20px;
-  line-height: 0.8;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 1;
 }
 
 .search-pill {
@@ -120,8 +124,14 @@
 }
 
 .search-pill span {
+  display: flex;
+  align-items: center;
   color: #aab2c0;
-  font-size: 16px;
+}
+
+.search-pill-text {
+  color: #0871ee;
+  font-weight: 400;
 }
 
 .profile-bubble {
@@ -173,14 +183,16 @@
 }
 
 .shield {
-  width: 24px;
+  display: flex;
+  align-items: center;
   color: rgba(255,255,255,0.86);
-  font-size: 25px;
 }
 
 .eye {
+  display: flex;
+  align-items: center;
   margin-left: 7px;
-  font-size: 20px;
+  color: rgba(255,255,255,0.75);
 }
 
 .asset-link {
@@ -242,6 +254,13 @@
   line-height: 1;
 }
 
+.quick-action-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0768c9;
+}
+
 .tng-scroll {
   flex: 1;
   min-height: 0;
@@ -260,82 +279,85 @@
   gap: 9px 11px;
 }
 
-.soft-card,
 .goaura-home-button {
   border-radius: 7px;
   background: #eaf3ff;
 }
 
-.soft-card {
+.promo-card {
   display: flex;
-  min-height: 50px;
   align-items: center;
   gap: 10px;
-  padding: 8px;
+  height: 70px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #eaf3ff;
 }
 
-.soft-card strong,
-.soft-card small {
-  display: block;
+.promo-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
 }
 
-.soft-card strong {
+.promo-text strong {
   font-size: 12px;
-}
-
-.soft-card small {
-  margin-top: 3px;
+  font-weight: 600 !important;
   color: #1f2937;
-  font-size: 10px;
 }
 
-.round-illustration {
+.promo-text small {
+  font-size: 10px;
+  color: #5f6673;
+}
+
+.promo-icon {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
   place-items: center;
   border-radius: 50%;
+}
+
+.grow-icon {
   background: #c6f2e5;
-  color: #efb000;
-  font-size: 10px;
-  font-weight: 900;
+  color: #16a34a;
 }
 
-.fuel-card {
-  grid-row: span 2;
-  display: block;
+.budi-icon {
+  background: #dbeafe;
+  color: #0871ee;
 }
 
-.fuel-brand {
-  display: inline-flex;
-  align-items: center;
-  min-height: 32px;
-  padding-left: 43px;
-  background:
-    radial-gradient(circle at 16px 50%, #5fb8db 0 16px, transparent 17px);
-  font-size: 13px;
-  font-weight: 900;
+.gift-icon {
+  background: #fef3c7;
+  color: #f59e0b;
 }
 
-.fuel-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 12px;
-  padding: 10px 7px 10px 12px;
-  border-radius: 10px;
+.reward-card {
+  background: #fff8ee;
+}
+
+.reward-sub {
+  color: #f59e0b !important;
+  font-weight: 700 !important;
+}
+
+.fuel-balance-card {
   background: #fff;
+  justify-content: space-between;
 }
 
-.fuel-bottom span {
+.fuel-balance-card .promo-text small {
+  font-size: 11px;
   color: #5f6673;
-  font-size: 12px;
 }
 
-.fuel-bottom strong {
-  display: block;
-  margin-top: 3px;
-  font-size: 14px;
+.fuel-balance-card .promo-text strong {
+  font-size: 12px;
+  font-weight: 600 !important;
 }
 
 .fuel-ring {
@@ -348,20 +370,6 @@
   color: #0871ee;
 }
 
-.reward-card button {
-  margin-top: 4px;
-  padding: 5px 16px;
-  border-radius: 999px;
-  background: #0871ee;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.gift-icon {
-  color: #ffb000;
-  font-size: 29px;
-}
 
 .goaura-home-button {
   position: relative;
@@ -393,13 +401,13 @@
 }
 
 .goaura-home-button strong {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .goaura-home-button small {
   margin-top: 3px;
   color: #d8c8ff;
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .home-section {
@@ -564,14 +572,25 @@
 }
 
 .tng-nav-btn.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 53px;
   height: 53px;
+  min-height: unset;
   margin: -17px auto 0;
   border: 4px solid #fff;
   border-radius: 50%;
   background: #0069d9;
   color: #fff;
   box-shadow: 0 5px 18px rgba(0, 105, 217, 0.32);
+}
+
+.tng-nav-btn.center span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 .tng-home .home-indicator {
