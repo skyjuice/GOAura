@@ -29,14 +29,10 @@ function AppHeader({ onHome }) {
     <header className="app-header">
       <div className="logo">
         <span className="logo-g">G</span>
-        <span className="logo-text">OAura</span>
+        <span className="logo-o">o</span>
+        <span className="logo-text">Aura</span>
       </div>
       <p className="tagline">TNG HyperPersonal · Financial Inclusion Engine</p>
-      {onHome && (
-        <button className="header-home-btn" onClick={onHome} aria-label="Go back to homepage">
-          ⌂
-        </button>
-      )}
     </header>
   )
 }

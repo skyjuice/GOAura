@@ -11,20 +11,20 @@ const quickActions = [
 ]
 
 const recommended = [
-  { icon: <CreditCard size={22} />, label: 'CardMatch', tag: 'NEW' },
+  { icon: <CreditCard size={20} />, label: 'CardMatch', tag: 'NEW' },
   { icon: '25', label: 'Payday', tag: '$$ IN' },
-  { icon: <Plane size={22} />, label: 'Travel' },
+  { icon: <Plane size={20} />, label: 'Travel' },
   { icon: '淘', label: 'Taobao', orange: true },
 ]
 
 const favourites = [
-  { icon: <ParkingSquare size={22} />, label: 'Street Parking' },
-  { icon: <Goal size={22} />, label: 'Goal City' },
-  { icon: <Banknote size={22} />, label: 'CashLoan', tag: 'NAK$$' },
+  { icon: <ParkingSquare size={20} />, label: 'Street Parking' },
+  { icon: <Goal size={20} />, label: 'Goal City' },
+  { icon: <Banknote size={20} />, label: 'CashLoan', tag: 'NAK$$' },
   { icon: 'ctos', label: 'CTOS Report' },
   { icon: 'ASNB', label: 'ASNB' },
   { icon: '+60', label: 'MY Prepaid' },
-  { icon: <Building2 size={22} />, label: 'My Business' },
+  { icon: <Building2 size={20} />, label: 'My Business' },
 ]
 
 const bottomNav = [

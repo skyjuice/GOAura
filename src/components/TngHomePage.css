@@ -58,7 +58,7 @@
   position: relative;
   z-index: 2;
   padding: 12px 17px 51px;
-  border-radius: 0 0 0 25px;
+  border-radius: 0 0 14px 14px;
   background: #075fbe;
   color: #fff;
 }
@@ -169,7 +169,7 @@
 }
 
 .wallet-row {
-  margin-top: 17px;
+  margin-top: 14px;
 }
 
 .balance-line {
@@ -196,7 +196,7 @@
 }
 
 .asset-link {
-  margin-top: 8px;
+  margin-top: 4px;
   color: rgba(255,255,255,0.66);
   font-size: 12px;
 }
@@ -204,8 +204,8 @@
 .money-row {
   display: flex;
   align-items: center;
-  gap: 18px;
-  margin-top: 15px;
+  gap: 14px;
+  margin-top: 14px;
 }
 
 .outline-btn {
@@ -222,13 +222,13 @@
   background: transparent;
   color: #fff;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 400;
 }
 
 .quick-tray {
   position: absolute;
   right: 17px;
-  bottom: -42px;
+  bottom: -32px;
   left: 17px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -249,7 +249,7 @@
 }
 
 .quick-action span {
-  color: #0768c9;
+  color: #0871ee;
   font-size: 25px;
   line-height: 1;
 }
@@ -258,7 +258,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #0768c9;
+  color: #0871ee;
 }
 
 .tng-scroll {
@@ -266,7 +266,7 @@
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 56px 17px 104px;
+  padding: 50px 17px 104px;
 }
 
 .tng-scroll::-webkit-scrollbar {
@@ -437,6 +437,29 @@
   background: transparent;
   color: #222936;
   font-size: 10px;
+  text-align: center;
+}
+
+.home-icon-tile > span:not(.tile-icon):not(.mini-tag) {
+  width: 100%;
+  text-align: center;
+}
+
+.text-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  color: #374151;
+  font-size: 7px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1;
+  overflow: hidden;
+  word-break: break-all;
 }
 
 .tile-icon {
@@ -444,7 +467,7 @@
   width: 31px;
   height: 31px;
   place-items: center;
-  color: #0768c9;
+  color: #0871ee;
   font-size: 21px;
   font-weight: 900;
   line-height: 1;
@@ -487,7 +510,7 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 9px 0;
+  gap: 9px;
 }
 
 .fav-tile {
