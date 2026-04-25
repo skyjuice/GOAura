@@ -46,7 +46,12 @@ export default function HomeScreen({ persona, claimed, totalClaimed, onNavigate 
 
       {/* TNG score */}
       <div className="section-label">YOUR TNG FINANCIAL SCORE</div>
-      <div className="score-card">
+      <button
+        type="button"
+        className="score-card score-card-clickable"
+        onClick={() => onNavigate?.('score')}
+        aria-label="Open full financial score analysis"
+      >
         <div className="score-circle" style={{ borderColor: scoreColor }}>
           <span className="score-val" style={{ color: scoreColor }}>{tngScore}</span>
         </div>
@@ -64,8 +69,9 @@ export default function HomeScreen({ persona, claimed, totalClaimed, onNavigate 
             </div>
             <span className="score-max">/ 850</span>
           </div>
+          <div className="score-link">Tap for full analysis →</div>
         </div>
-      </div>
+      </button>
 
       {/* coach tip */}
       <div className="section-label">AI COACH TIP</div>

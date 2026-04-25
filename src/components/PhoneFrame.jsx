@@ -4,6 +4,7 @@ import CoachScreen from './CoachScreen.jsx'
 import BenefitsScreen from './BenefitsScreen.jsx'
 import BudgetScreen from './BudgetScreen.jsx'
 import FinanceScreen from './FinanceScreen.jsx'
+import ScoreAnalysisScreen from './ScoreAnalysisScreen.jsx'
 import './PhoneFrame.css'
 
 const TABS = [
@@ -24,10 +25,21 @@ const APP_NAV = [
 
 export default function PhoneFrame({ persona, routeAnimation = '', onHome }) {
   const [tab, setTab] = useState('home')
+  const [detail, setDetail] = useState(null) // 'score' | null
   const [claimed, setClaimed] = useState({})
 
   const claim = (id, amount) => setClaimed(prev => ({ ...prev, [id]: amount }))
   const totalClaimed = Object.values(claimed).reduce((a, b) => a + b, 0)
+
+  const navigate = (next) => {
+    if (next === 'score') {
+      setDetail('score')
+      return
+    }
+    setDetail(null)
+    setTab(next)
+  }
+
   const handleAppNav = (action) => {
     if (action === 'home') {
       onHome?.()
@@ -35,7 +47,7 @@ export default function PhoneFrame({ persona, routeAnimation = '', onHome }) {
     }
 
     if (action === 'finance') {
-      setTab('finance')
+      navigate('finance')
     }
   }
 
@@ -59,37 +71,42 @@ export default function PhoneFrame({ persona, routeAnimation = '', onHome }) {
           </span>
         </div>
 
-        <div className="phone-header">
-          <div className="header-label">TNG HyperPersonal</div>
-          <div className="header-name">Hi {persona.name.split(',')[0]} 👋</div>
-          <div className="header-pill" style={{ borderColor: persona.dotColor }}>
-            <span className="pill-dot" style={{ background: persona.dotColor }} />
-            {persona.badge}
-            {totalClaimed > 0 && (
-              <span className="pill-saved"> · RM {totalClaimed.toFixed(0)} claimed</span>
-            )}
+        {!detail && (
+          <div className="phone-header">
+            <div className="header-label">TNG HyperPersonal</div>
+            <div className="header-name">Hi {persona.name.split(',')[0]} 👋</div>
+            <div className="header-pill" style={{ borderColor: persona.dotColor }}>
+              <span className="pill-dot" style={{ background: persona.dotColor }} />
+              {persona.badge}
+              {totalClaimed > 0 && (
+                <span className="pill-saved"> · RM {totalClaimed.toFixed(0)} claimed</span>
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="tab-bar">
-          {TABS.map(t => (
-            <button
-              key={t.id}
-              className={`tab-btn ${tab === t.id ? 'active' : ''}`}
-              style={tab === t.id ? { background: '#fff', color: 'var(--wallet-blue)' } : {}}
-              onClick={() => setTab(t.id)}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
+        {!detail && (
+          <div className="tab-bar">
+            {TABS.map(t => (
+              <button
+                key={t.id}
+                className={`tab-btn ${tab === t.id ? 'active' : ''}`}
+                style={tab === t.id ? { background: '#fff', color: 'var(--wallet-blue)' } : {}}
+                onClick={() => navigate(t.id)}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        )}
 
         <div className="screen-area">
-          {tab === 'home'     && <HomeScreen persona={persona} claimed={claimed} totalClaimed={totalClaimed} onNavigate={setTab} />}
-          {tab === 'coach'    && <CoachScreen persona={persona} />}
-          {tab === 'benefits' && <BenefitsScreen persona={persona} claimed={claimed} onClaim={claim} />}
-          {tab === 'budget'   && <BudgetScreen persona={persona} claimed={claimed} totalClaimed={totalClaimed} />}
-          {tab === 'finance'  && <FinanceScreen persona={persona} claimed={claimed} totalClaimed={totalClaimed} />}
+          {detail === 'score' && <ScoreAnalysisScreen persona={persona} onBack={() => setDetail(null)} />}
+          {!detail && tab === 'home'     && <HomeScreen persona={persona} claimed={claimed} totalClaimed={totalClaimed} onNavigate={navigate} />}
+          {!detail && tab === 'coach'    && <CoachScreen persona={persona} />}
+          {!detail && tab === 'benefits' && <BenefitsScreen persona={persona} claimed={claimed} onClaim={claim} />}
+          {!detail && tab === 'budget'   && <BudgetScreen persona={persona} claimed={claimed} totalClaimed={totalClaimed} />}
+          {!detail && tab === 'finance'  && <FinanceScreen persona={persona} claimed={claimed} totalClaimed={totalClaimed} />}
         </div>
 
         <nav className="tng-nav goaura-app-nav">
