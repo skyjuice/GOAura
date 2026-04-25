@@ -36,6 +36,7 @@ export default function BenefitsScreen({ persona, claimed, onClaim }) {
 
   useEffect(() => {
     let cancelled = false
+    setBenefits(fallback)
     apiGetBenefits(persona.id)
       .then((data) => {
         if (cancelled) return

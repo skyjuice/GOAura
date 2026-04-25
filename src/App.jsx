@@ -106,7 +106,7 @@ export default function App() {
       <AppHeader onHome={goHome} />
 
       <main className="app-stage">
-        <PhoneFrame persona={PERSONAS[persona]} routeAnimation={routeAnimation} onHome={goHome} />
+        <PhoneFrame key={PERSONAS[persona].id} persona={PERSONAS[persona]} routeAnimation={routeAnimation} onHome={goHome} />
         <PersonaPanel persona={persona} onPersonaChange={setPersona} />
       </main>
 

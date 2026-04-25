@@ -13,7 +13,7 @@ const SITI_DATA = {
 }
 
 const AHMAD_DATA = {
-  income: 3200, spend: 2100, potential: 144,
+  income: 3210, spend: 2100, potential: 144,
   topSpend: [
     { cat: 'Fuel',       amount: 680, pct: 32, color: '#F59E0B' },
     { cat: 'Food',       amount: 310, pct: 15, color: '#EF4444' },
@@ -37,6 +37,16 @@ export default function HomeScreen({ persona, claimed, totalClaimed, onNavigate 
 
   useEffect(() => {
     let cancelled = false
+    setHome({
+      income: fallback.income,
+      spend: fallback.spend,
+      potential: fallback.potential,
+      topSpend: fallback.topSpend,
+      coachTip: fallback.coachTip,
+      tngScore: persona.id === 'ahmad' ? 714 : 698,
+      transactions: persona.id === 'ahmad' ? 340 : 180,
+      months: persona.id === 'ahmad' ? 18 : 12,
+    })
     apiGetHome(persona.id)
       .then((data) => {
         if (cancelled) return
@@ -60,6 +70,7 @@ export default function HomeScreen({ persona, claimed, totalClaimed, onNavigate 
   }, [persona.id])
 
   const scoreColor = home.tngScore >= 700 ? '#22C55E' : '#F59E0B'
+  const expenseTotal = Math.max(1, home.spend || home.topSpend.reduce((sum, item) => sum + item.amount, 0))
 
   return (
     <div className="home-screen">
@@ -123,7 +134,7 @@ export default function HomeScreen({ persona, claimed, totalClaimed, onNavigate 
             <div className="spend-cat">{s.cat}</div>
             <div className="spend-bar-wrap">
               <div className="spend-bar">
-                <div className="spend-fill" style={{ width: `${s.pct * 2.5}%`, background: s.color }} />
+                <div className="spend-fill" style={{ width: `${Math.min(100, (s.amount / expenseTotal) * 100)}%`, background: s.color }} />
               </div>
             </div>
             <div className="spend-amount">RM {s.amount}</div>

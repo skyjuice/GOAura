@@ -44,6 +44,8 @@ export default function BudgetScreen({ persona, claimed, totalClaimed }) {
 
   useEffect(() => {
     let cancelled = false
+    setWithBenefits(false)
+    setData(fallback)
     apiGetBudget(persona.id)
       .then((res) => {
         if (cancelled) return
