@@ -277,6 +277,22 @@
   font-weight: 500;
 }
 
+.phone-app-content .goaura-app-nav {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  width: 100%;
+  flex-shrink: 0;
+  padding: 7px 12px 25px;
+  border-top-color: #f4e9ca;
+  border-radius: 0 0 32px 32px;
+}
+
+.phone-app-content .goaura-app-nav .tng-nav-btn.center {
+  margin-top: -16px;
+}
+
 .home-indicator {
   position: absolute;
   left: 50%;

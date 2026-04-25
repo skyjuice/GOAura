@@ -3,21 +3,41 @@ import HomeScreen from './HomeScreen.jsx'
 import CoachScreen from './CoachScreen.jsx'
 import BenefitsScreen from './BenefitsScreen.jsx'
 import BudgetScreen from './BudgetScreen.jsx'
+import FinanceScreen from './FinanceScreen.jsx'
 import './PhoneFrame.css'
 
 const TABS = [
-  { id: 'home',     label: 'Home',     icon: '⌂' },
-  { id: 'coach',    label: 'Coach',    icon: '◈' },
-  { id: 'benefits', label: 'Benefits', icon: '◎' },
-  { id: 'budget',   label: 'Budget',   icon: '◉' },
+  { id: 'home',     label: 'Home' },
+  { id: 'coach',    label: 'Coach' },
+  { id: 'benefits', label: 'Benefits' },
+  { id: 'budget',   label: 'Budget' },
+  { id: 'finance',  label: 'Finance' },
 ]
 
-export default function PhoneFrame({ persona, routeAnimation = '' }) {
+const APP_NAV = [
+  { icon: '⌂', label: 'Home', action: 'home' },
+  { icon: '🛒', label: 'eShop' },
+  { icon: '⌂', label: '', action: 'home', center: true, active: true },
+  { icon: '$', label: 'GOFinance', action: 'finance' },
+  { icon: '⌖', label: 'Near Me' },
+]
+
+export default function PhoneFrame({ persona, routeAnimation = '', onHome }) {
   const [tab, setTab] = useState('home')
   const [claimed, setClaimed] = useState({})
 
   const claim = (id, amount) => setClaimed(prev => ({ ...prev, [id]: amount }))
   const totalClaimed = Object.values(claimed).reduce((a, b) => a + b, 0)
+  const handleAppNav = (action) => {
+    if (action === 'home') {
+      onHome?.()
+      return
+    }
+
+    if (action === 'finance') {
+      setTab('finance')
+    }
+  }
 
   return (
     <div className="phone">
@@ -69,15 +89,20 @@ export default function PhoneFrame({ persona, routeAnimation = '' }) {
           {tab === 'coach'    && <CoachScreen persona={persona} />}
           {tab === 'benefits' && <BenefitsScreen persona={persona} claimed={claimed} onClaim={claim} />}
           {tab === 'budget'   && <BudgetScreen persona={persona} claimed={claimed} totalClaimed={totalClaimed} />}
+          {tab === 'finance'  && <FinanceScreen persona={persona} claimed={claimed} totalClaimed={totalClaimed} />}
         </div>
 
-        <nav className="bottom-nav">
-          {TABS.map(t => (
-            <button key={t.id} className={`nav-item ${tab === t.id ? 'active' : ''}`} onClick={() => setTab(t.id)}>
-              <span className="nav-icon">{t.icon}</span>
-              <span className="nav-label" style={tab === t.id ? { color: persona.accentColor } : {}}>
-                {t.label}
-              </span>
+        <nav className="tng-nav goaura-app-nav">
+          {APP_NAV.map(item => (
+            <button
+              key={`${item.icon}-${item.label || item.action}`}
+              className={`tng-nav-btn ${item.active ? 'active' : ''} ${item.center ? 'center' : ''}`}
+              onClick={() => handleAppNav(item.action)}
+              aria-label={item.label || 'Go back to homepage'}
+              type="button"
+            >
+              <span>{item.icon}</span>
+              {item.label && <small>{item.label}</small>}
             </button>
           ))}
         </nav>
