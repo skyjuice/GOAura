@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { LayoutDashboard } from 'lucide-react'
 import PhoneFrame from './components/PhoneFrame.jsx'
 import TngHomePage from './components/TngHomePage.jsx'
 import './styles/app.css'
@@ -16,15 +17,15 @@ const PERSONAS = [
   {
     id: 'ahmad',
     name: 'Ahmad, 28',
-    role: 'Grab Driver · No Bank Account',
-    badge: 'Unbanked · Gig Worker',
+    role: 'Grab Driver',
+    badge: 'Gig Worker',
     badgeColor: '#D97706',
     accentColor: '#F59E0B',
     dotColor: '#FCD34D',
   },
 ]
 
-function AppHeader({ onHome }) {
+function AppHeader({ onHome, onDashboard }) {
   return (
     <header className="app-header">
       <div className="logo">
@@ -32,6 +33,11 @@ function AppHeader({ onHome }) {
         <span className="logo-o">o</span>
         <span className="logo-text">Aura</span>
       </div>
+      {onDashboard && (
+        <button className="dashboard-btn" onClick={onDashboard} aria-label="Go to dashboard">
+          <LayoutDashboard size={16} />
+        </button>
+      )}
       <p className="tagline">TNG HyperPersonal · Financial Inclusion Engine</p>
     </header>
   )
@@ -99,7 +105,7 @@ export default function App() {
 
   return (
     <div className="app-root">
-      <AppHeader onHome={goHome} />
+      <AppHeader onHome={goHome} onDashboard={goHome} />
 
       <main className="app-stage">
         <PhoneFrame key={PERSONAS[persona].id} persona={PERSONAS[persona]} routeAnimation={routeAnimation} onHome={goHome} />

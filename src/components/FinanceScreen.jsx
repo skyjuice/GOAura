@@ -6,12 +6,12 @@ const FINANCE_DATA = {
   siti: {
     income: 2100,
     spend: 1650,
-    tngScore: 698,
+    tngScore: 599,
     ctos: null,
     ccris: null,
     transactions: 180,
     months: 12,
-    baseLimit: 850,
+    baseLimit: 1000,
     boostedLimit: 1450,
     risk: 'Alternative data approved',
     status: 'No CTOS or CCRIS file yet',
@@ -56,7 +56,7 @@ const FINANCE_DATA = {
 }
 
 function ScoreCard({ label, value, score, tone, note }) {
-  const pct = typeof score === 'number' ? Math.min(100, Math.max(0, (score / 850) * 100)) : 0
+  const pct = typeof score === 'number' ? Math.min(100, Math.max(0, (score / 1000) * 100)) : 0
 
   return (
     <div className={`finance-score-card ${tone || ''}`}>

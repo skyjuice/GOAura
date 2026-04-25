@@ -67,7 +67,7 @@ function computeCoachTip(userId, topSpend, claims) {
 
 function computeTngScore(baseScore, txCount, claimedCount) {
   const score = baseScore + txCount * 0.8 + claimedCount * 12
-  return Math.max(300, Math.min(850, Math.round(score)))
+  return Math.max(300, Math.min(1000, Math.round(score)))
 }
 
 async function fsGetClaims(userId) {
@@ -223,7 +223,7 @@ async function fsGetFinance(userId) {
   const claims = claimsRes.claims || {}
   const totalClaimed = Object.values(claims).reduce((a, b) => a + asNumber(b, 0), 0)
   const benefitLift = Math.min(250, totalClaimed * 2)
-  const baseLimit = asNumber(user.baseLimit, 850)
+  const baseLimit = asNumber(user.baseLimit, 1000)
   const boostedLimit = asNumber(user.boostedLimit, 1450)
   const limit = Math.min(boostedLimit, baseLimit + benefitLift)
   const repayment = Math.round(limit / 6)

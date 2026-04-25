@@ -30,9 +30,9 @@ export default function HomeScreen({ persona, claimed, totalClaimed, onNavigate 
     potential: fallback.potential,
     topSpend: fallback.topSpend,
     coachTip: fallback.coachTip,
-    tngScore: persona.id === 'ahmad' ? 714 : 698,
-    transactions: persona.id === 'ahmad' ? 340 : 180,
-    months: persona.id === 'ahmad' ? 18 : 12,
+    tngScore: persona.id === 'ahmad' ? 714 : 599,
+    transactions: persona.id === 'ahmad' ? 125 : 180,
+    months: persona.id === 'ahmad' ? 6 : 12,
   }))
 
   useEffect(() => {
@@ -43,9 +43,9 @@ export default function HomeScreen({ persona, claimed, totalClaimed, onNavigate 
       potential: fallback.potential,
       topSpend: fallback.topSpend,
       coachTip: fallback.coachTip,
-      tngScore: persona.id === 'ahmad' ? 714 : 698,
-      transactions: persona.id === 'ahmad' ? 340 : 180,
-      months: persona.id === 'ahmad' ? 18 : 12,
+      tngScore: persona.id === 'ahmad' ? 714 : 599,
+      transactions: persona.id === 'ahmad' ? 125 : 180,
+      months: persona.id === 'ahmad' ? 6 : 12,
     })
     apiGetHome(persona.id)
       .then((data) => {
@@ -56,9 +56,9 @@ export default function HomeScreen({ persona, claimed, totalClaimed, onNavigate 
           potential: data.potential,
           topSpend: data.topSpend,
           coachTip: data.coachTip,
-          tngScore: data.tngScore,
-          transactions: data.transactions,
-          months: data.months,
+          tngScore: persona.id === 'ahmad' ? 714 : 599,
+          transactions: persona.id === 'ahmad' ? 125 : 180,
+          months: persona.id === 'ahmad' ? 6 : 12,
         })
       })
       .catch(() => {
@@ -106,13 +106,13 @@ export default function HomeScreen({ persona, claimed, totalClaimed, onNavigate 
             {home.tngScore >= 700 ? 'Good' : 'Fair'}
           </div>
           <div className="score-desc">
-            Built from <strong>{home.transactions} transactions</strong> over {home.months} months. No bank account needed.
+            Built from <strong>{home.transactions} transactions</strong> over {home.months} months.
           </div>
           <div className="score-bar-wrap">
             <div className="score-bar">
-              <div className="score-fill" style={{ width: `${(home.tngScore / 850) * 100}%`, background: scoreColor }} />
+              <div className="score-fill" style={{ width: `${(home.tngScore / 1000) * 100}%`, background: scoreColor }} />
             </div>
-            <span className="score-max">/ 850</span>
+            <span className="score-max">/ 1000</span>
           </div>
           <div className="score-link">Tap for full analysis →</div>
         </div>

@@ -126,7 +126,7 @@ const SITI_OPENING = [
 ]
 
 const AHMAD_OPENING = [
-  { from: 'ai', text: "Ahmad, you've been driving with Grab for 18 months — 340 TNG transactions. I've built you a financial identity. No bank account needed." },
+  { from: 'ai', text: "Ahmad, you've been driving with Grab for 18 months — 340 TNG transactions. I've built you a financial identity." },
   { from: 'ai', text: "Fuel: RM 680/month at 4 stations → PETRONAS Shell on Jln Duta gives 8% back vs 3% elsewhere. That's RM 40 extra per month.\nCredit: You qualify for RM 300 micro-credit. Each repayment raises your TNG Score.", type: 'highlight' },
 ]
 

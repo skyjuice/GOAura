@@ -3,9 +3,9 @@ import './ScoreAnalysisScreen.css'
 
 function buildScoreModel(persona) {
   const isAhmad = persona.id === 'ahmad'
-  const score = isAhmad ? 714 : 698
-  const months = isAhmad ? 18 : 12
-  const txns = isAhmad ? 340 : 180
+  const score = isAhmad ? 714 : 599
+  const months = isAhmad ? 6 : 12
+  const txns = isAhmad ? 125 : 180
 
   const signals = isAhmad
     ? {
@@ -140,7 +140,7 @@ export default function ScoreAnalysisScreen({ persona, onBack }) {
       <div className="score-hero">
         <div className="score-hero-circle" style={{ borderColor: scoreColor }}>
           <div className="score-hero-val" style={{ color: scoreColor }}>{model.score}</div>
-          <div className="score-hero-max">/ 850</div>
+          <div className="score-hero-max">/ 1000</div>
         </div>
         <div className="score-hero-info">
           <div className="score-hero-status" style={{ color: scoreColor }}>
