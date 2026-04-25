@@ -1,0 +1,595 @@
+.app-root-home {
+  gap: 1.5rem;
+}
+
+.tng-phone {
+  background: #0060c7;
+}
+
+.tng-phone::before,
+.tng-phone::after {
+  z-index: 20;
+}
+
+.tng-home {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 42px;
+  background: #f6f8fd;
+  color: #1d2433;
+}
+
+.tng-status-row {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 25px 0;
+  background: #075fbe;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.tng-signal {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+}
+
+.tng-signal strong {
+  display: inline-flex;
+  min-width: 24px;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.9);
+  color: #075fbe;
+  line-height: 1.1;
+}
+
+.tng-blue {
+  position: relative;
+  z-index: 2;
+  padding: 12px 17px 51px;
+  border-radius: 0 0 0 25px;
+  background: #075fbe;
+  color: #fff;
+}
+
+.tng-top-row {
+  display: grid;
+  grid-template-columns: 1fr 2.2fr 38px;
+  align-items: center;
+  gap: 10px;
+}
+
+.trip-pill,
+.search-pill,
+.outline-btn,
+.transaction-btn,
+.quick-action,
+.goaura-home-button,
+.home-icon-tile,
+.section-title-row button,
+.tng-nav-btn,
+.payday-sticker,
+.reward-card button {
+  border: 0;
+  font: inherit;
+}
+
+.trip-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 31px;
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff856d, #ff6076);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  box-shadow: inset 0 -8px 16px rgba(255,255,255,0.16);
+}
+
+.trip-pill span {
+  font-size: 20px;
+  line-height: 0.8;
+}
+
+.search-pill {
+  display: flex;
+  min-height: 31px;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: #fff;
+  color: #2b3240;
+  font-size: 12px;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.search-pill span {
+  color: #aab2c0;
+  font-size: 16px;
+}
+
+.profile-bubble {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 35%, #fff 0 7px, transparent 8px),
+    radial-gradient(circle at 50% 80%, #fff 0 12px, transparent 13px),
+    #7db2e6;
+}
+
+.profile-dot,
+.coin-dot {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.profile-dot {
+  top: -1px;
+  right: -1px;
+  width: 8px;
+  height: 8px;
+  background: #ff3b30;
+}
+
+.coin-dot {
+  right: -3px;
+  bottom: 4px;
+  width: 13px;
+  height: 13px;
+  border: 2px solid #ffd15c;
+  background: #ffb800;
+}
+
+.wallet-row {
+  margin-top: 17px;
+}
+
+.balance-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 27px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.shield {
+  width: 24px;
+  color: rgba(255,255,255,0.86);
+  font-size: 25px;
+}
+
+.eye {
+  margin-left: 7px;
+  font-size: 20px;
+}
+
+.asset-link {
+  margin-top: 8px;
+  color: rgba(255,255,255,0.66);
+  font-size: 12px;
+}
+
+.money-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 15px;
+}
+
+.outline-btn {
+  min-width: 139px;
+  padding: 7px 16px;
+  border: 1.4px solid #fff;
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  font-size: 13px;
+}
+
+.transaction-btn {
+  background: transparent;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.quick-tray {
+  position: absolute;
+  right: 17px;
+  bottom: -42px;
+  left: 17px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 13px 10px 12px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 11px 22px rgba(27, 39, 63, 0.13);
+}
+
+.quick-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: #1f2937;
+  font-size: 11px;
+}
+
+.quick-action span {
+  color: #0768c9;
+  font-size: 25px;
+  line-height: 1;
+}
+
+.tng-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 56px 17px 104px;
+}
+
+.tng-scroll::-webkit-scrollbar {
+  width: 0;
+}
+
+.promo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px 11px;
+}
+
+.soft-card,
+.goaura-home-button {
+  border-radius: 7px;
+  background: #eaf3ff;
+}
+
+.soft-card {
+  display: flex;
+  min-height: 50px;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+}
+
+.soft-card strong,
+.soft-card small {
+  display: block;
+}
+
+.soft-card strong {
+  font-size: 12px;
+}
+
+.soft-card small {
+  margin-top: 3px;
+  color: #1f2937;
+  font-size: 10px;
+}
+
+.round-illustration {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  background: #c6f2e5;
+  color: #efb000;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.fuel-card {
+  grid-row: span 2;
+  display: block;
+}
+
+.fuel-brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding-left: 43px;
+  background:
+    radial-gradient(circle at 16px 50%, #5fb8db 0 16px, transparent 17px);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.fuel-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 10px 7px 10px 12px;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.fuel-bottom span {
+  color: #5f6673;
+  font-size: 12px;
+}
+
+.fuel-bottom strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 14px;
+}
+
+.fuel-ring {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 7px solid #0871ee;
+  border-radius: 50%;
+  color: #0871ee;
+}
+
+.reward-card button {
+  margin-top: 4px;
+  padding: 5px 16px;
+  border-radius: 999px;
+  background: #0871ee;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.gift-icon {
+  color: #ffb000;
+  font-size: 29px;
+}
+
+.goaura-home-button {
+  position: relative;
+  display: flex;
+  grid-column: 1 / -1;
+  min-height: 50px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 8px 10px 8px 44px;
+  background: linear-gradient(135deg, #27147c, #6d28d9);
+  color: #fff;
+  text-align: left;
+  box-shadow: 0 8px 18px rgba(109, 40, 217, 0.2);
+}
+
+.goaura-badge {
+  position: absolute;
+  left: 11px;
+  display: grid;
+  width: 27px;
+  height: 27px;
+  place-items: center;
+  border-radius: 9px;
+  background: rgba(255,255,255,0.16);
+  color: #d8c8ff;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.goaura-home-button strong {
+  font-size: 11px;
+}
+
+.goaura-home-button small {
+  margin-top: 3px;
+  color: #d8c8ff;
+  font-size: 9px;
+}
+
+.home-section {
+  margin-top: 10px;
+}
+
+.home-section h2 {
+  margin-bottom: 8px;
+  color: #050b16;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.icon-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.home-icon-tile {
+  position: relative;
+  display: flex;
+  min-height: 57px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  background: transparent;
+  color: #222936;
+  font-size: 10px;
+}
+
+.tile-icon {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  color: #0768c9;
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.home-icon-tile.orange .tile-icon {
+  border-radius: 8px;
+  background: #f97316;
+  color: #fff;
+  font-size: 17px;
+}
+
+.mini-tag {
+  position: absolute;
+  top: -4px;
+  right: 7px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #ef2f2f;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 900;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.section-title-row button {
+  margin-bottom: 8px;
+  background: transparent;
+  color: #0871ee;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.fav-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px 0;
+}
+
+.fav-tile {
+  min-height: 58px;
+}
+
+.fav-tile .tile-icon {
+  font-size: 18px;
+}
+
+.payday-sticker {
+  position: relative;
+  align-self: start;
+  min-height: 64px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 38%, #ff4f70 0 34px, #d9143c 35px);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.2);
+}
+
+.payday-sticker small {
+  display: block;
+  margin: 5px auto 0;
+  max-width: 68px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: #ffd16e;
+  color: #0871ee;
+  font-size: 9px;
+  text-shadow: none;
+}
+
+.close-dot {
+  position: absolute;
+  top: -3px;
+  right: 4px;
+  display: grid;
+  width: 17px;
+  height: 17px;
+  place-items: center;
+  border-radius: 50%;
+  background: #4b5563;
+  color: #fff;
+  font-size: 13px;
+}
+
+.tng-nav {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: end;
+  padding: 7px 12px 27px;
+  border-top: 1px solid #f4e9ca;
+  background: #fff;
+}
+
+.tng-nav-btn {
+  display: flex;
+  min-height: 39px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: transparent;
+  color: #6b7280;
+  font-size: 21px;
+}
+
+.tng-nav-btn small {
+  font-size: 10px;
+}
+
+.tng-nav-btn.active {
+  color: #0871ee;
+}
+
+.tng-nav-btn.center {
+  width: 53px;
+  height: 53px;
+  margin: -17px auto 0;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  background: #0069d9;
+  color: #fff;
+  box-shadow: 0 5px 18px rgba(0, 105, 217, 0.32);
+}
+
+.tng-home .home-indicator {
+  background: #020617;
+}
+
+@media (max-width: 460px) {
+  .tng-blue {
+    padding-inline: 15px;
+  }
+
+  .tng-top-row {
+    grid-template-columns: 0.95fr 2fr 36px;
+    gap: 8px;
+  }
+
+  .trip-pill,
+  .search-pill {
+    font-size: 11px;
+  }
+}
