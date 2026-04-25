@@ -1,0 +1,115 @@
+.phone {
+  width: 100%;
+  max-width: 360px;
+  background: #0D1F6E;
+  border-radius: 36px;
+  border: 5px solid #1a1a2e;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 680px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+}
+
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 18px 4px;
+  font-size: 10px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.phone-header {
+  padding: 10px 14px 10px;
+}
+.header-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 2px;
+}
+.header-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+}
+.header-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.8);
+  margin-top: 5px;
+}
+.pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.pill-saved {
+  color: #22C55E;
+  font-weight: 600;
+}
+
+.tab-bar {
+  display: flex;
+  gap: 4px;
+  padding: 0 10px 10px;
+}
+.tab-btn {
+  flex: 1;
+  padding: 5px 0;
+  border-radius: 20px;
+  border: none;
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.55);
+  transition: all 0.18s;
+}
+.tab-btn.active {
+  background: #fff;
+  color: #0D1F6E;
+}
+
+.screen-area {
+  flex: 1;
+  overflow-y: auto;
+  background: #F2F4F8;
+  border-radius: 18px 18px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+.screen-area::-webkit-scrollbar { width: 3px; }
+.screen-area::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+  padding: 8px 0 12px;
+  border-top: 1px solid #f3f4f6;
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  padding: 2px 8px;
+}
+.nav-icon {
+  font-size: 16px;
+  color: #9CA3AF;
+}
+.nav-label {
+  font-size: 9px;
+  color: #9CA3AF;
+  font-weight: 500;
+}
