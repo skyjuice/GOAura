@@ -1,0 +1,12 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // NOTE: Hackathon/demo rules.
+    // For production, lock this down and require authentication + per-user authorization.
+    match /{document=**} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}

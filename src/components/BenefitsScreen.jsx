@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './BenefitsScreen.css'
+import { apiGetBenefits } from '../api/goauraApi.js'
 
 const SITI_BENEFITS = [
   { id: 'mysej',  icon: 'M', label: 'MySejahtera Panel Clinic', desc: 'RM 30 → RM 1 per visit · 12 clinics near Klang', amount: 28,  urgency: 'urgent',    iconBg: '#FEE2E2', iconColor: '#991B1B' },
@@ -30,7 +31,23 @@ const CLAIM_LABELS = {
 }
 
 export default function BenefitsScreen({ persona, claimed, onClaim }) {
-  const benefits = persona.id === 'siti' ? SITI_BENEFITS : AHMAD_BENEFITS
+  const fallback = persona.id === 'siti' ? SITI_BENEFITS : AHMAD_BENEFITS
+  const [benefits, setBenefits] = useState(fallback)
+
+  useEffect(() => {
+    let cancelled = false
+    apiGetBenefits(persona.id)
+      .then((data) => {
+        if (cancelled) return
+        if (Array.isArray(data?.benefits)) setBenefits(data.benefits)
+      })
+      .catch(() => {
+        if (cancelled) return
+        setBenefits(fallback)
+      })
+    return () => { cancelled = true }
+  }, [persona.id])
+
   const totalClaimable = benefits.filter(b => b.amount > 0).reduce((a, b) => a + b.amount, 0)
   const totalClaimed = Object.values(claimed).reduce((a, b) => a + b, 0)
   const claimedCount = Object.keys(claimed).length
@@ -51,7 +68,7 @@ export default function BenefitsScreen({ persona, claimed, onClaim }) {
       {/* benefit cards */}
       <div className="benefits-list">
         {benefits.map(b => {
-          const isClaimed = !!claimed[b.id]
+          const isClaimed = !!claimed[b.id] || !!b.claimed
           const urg = URGENCY_CONFIG[b.urgency]
           const claimLabel = CLAIM_LABELS[b.urgency]
 

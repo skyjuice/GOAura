@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './HomeScreen.css'
+import { apiGetHome } from '../api/goauraApi.js'
 
 const SITI_DATA = {
   income: 2100, spend: 1650, potential: 308,
@@ -22,24 +23,58 @@ const AHMAD_DATA = {
 }
 
 export default function HomeScreen({ persona, claimed, totalClaimed, onNavigate }) {
-  const data = persona.id === 'siti' ? SITI_DATA : AHMAD_DATA
-  const tngScore = persona.id === 'ahmad' ? 714 : 698
-  const scoreColor = tngScore >= 700 ? '#22C55E' : '#F59E0B'
+  const fallback = persona.id === 'siti' ? SITI_DATA : AHMAD_DATA
+  const [home, setHome] = useState(() => ({
+    income: fallback.income,
+    spend: fallback.spend,
+    potential: fallback.potential,
+    topSpend: fallback.topSpend,
+    coachTip: fallback.coachTip,
+    tngScore: persona.id === 'ahmad' ? 714 : 698,
+    transactions: persona.id === 'ahmad' ? 340 : 180,
+    months: persona.id === 'ahmad' ? 18 : 12,
+  }))
+
+  useEffect(() => {
+    let cancelled = false
+    apiGetHome(persona.id)
+      .then((data) => {
+        if (cancelled) return
+        setHome({
+          income: data.income,
+          spend: data.spend,
+          potential: data.potential,
+          topSpend: data.topSpend,
+          coachTip: data.coachTip,
+          tngScore: data.tngScore,
+          transactions: data.transactions,
+          months: data.months,
+        })
+      })
+      .catch(() => {
+        // Keep fallback demo data if backend isn't available.
+        if (cancelled) return
+        setHome((prev) => ({ ...prev, ...fallback }))
+      })
+    return () => { cancelled = true }
+  }, [persona.id])
+
+  const scoreColor = home.tngScore >= 700 ? '#22C55E' : '#F59E0B'
 
   return (
     <div className="home-screen">
       {/* summary row */}
       <div className="summary-row">
         <div className="summary-chip">
-          <div className="chip-val">RM {data.income.toLocaleString()}</div>
+          <div className="chip-val">RM {home.income.toLocaleString()}</div>
           <div className="chip-lbl">Income</div>
         </div>
         <div className="summary-chip">
-          <div className="chip-val" style={{ color: '#EF4444' }}>RM {data.spend.toLocaleString()}</div>
+          <div className="chip-val" style={{ color: '#EF4444' }}>RM {home.spend.toLocaleString()}</div>
           <div className="chip-lbl">Expenses</div>
         </div>
         <div className="summary-chip highlight">
-          <div className="chip-val" style={{ color: '#22C55E' }}>RM {data.potential}</div>
+          <div className="chip-val" style={{ color: '#22C55E' }}>RM {home.potential}</div>
           <div className="chip-lbl">Potential saves</div>
         </div>
       </div>
@@ -48,19 +83,18 @@ export default function HomeScreen({ persona, claimed, totalClaimed, onNavigate 
       <div className="section-label">YOUR TNG FINANCIAL SCORE</div>
       <div className="score-card">
         <div className="score-circle" style={{ borderColor: scoreColor }}>
-          <span className="score-val" style={{ color: scoreColor }}>{tngScore}</span>
+          <span className="score-val" style={{ color: scoreColor }}>{home.tngScore}</span>
         </div>
         <div className="score-info">
           <div className="score-status" style={{ color: scoreColor }}>
-            {tngScore >= 700 ? 'Good' : 'Fair'}
+            {home.tngScore >= 700 ? 'Good' : 'Fair'}
           </div>
           <div className="score-desc">
-            Built from <strong>{persona.id === 'ahmad' ? '340' : '180'} transactions</strong> over{' '}
-            {persona.id === 'ahmad' ? '18' : '12'} months. No bank account needed.
+            Built from <strong>{home.transactions} transactions</strong> over {home.months} months. No bank account needed.
           </div>
           <div className="score-bar-wrap">
             <div className="score-bar">
-              <div className="score-fill" style={{ width: `${(tngScore / 850) * 100}%`, background: scoreColor }} />
+              <div className="score-fill" style={{ width: `${(home.tngScore / 850) * 100}%`, background: scoreColor }} />
             </div>
             <span className="score-max">/ 850</span>
           </div>
@@ -71,14 +105,14 @@ export default function HomeScreen({ persona, claimed, totalClaimed, onNavigate 
       <div className="section-label">AI COACH TIP</div>
       <div className="coach-tip-card" onClick={() => onNavigate('coach')}>
         <div className="coach-avatar">AI</div>
-        <div className="coach-bubble">{data.coachTip}</div>
+        <div className="coach-bubble">{home.coachTip}</div>
         <div className="coach-cta">Tap to chat →</div>
       </div>
 
       {/* top spend */}
       <div className="section-label">TOP SPENDING</div>
       <div className="spend-card">
-        {data.topSpend.map(s => (
+        {home.topSpend.map(s => (
           <div key={s.cat} className="spend-row">
             <div className="spend-cat">{s.cat}</div>
             <div className="spend-bar-wrap">
@@ -95,7 +129,7 @@ export default function HomeScreen({ persona, claimed, totalClaimed, onNavigate 
       <div className="section-label">QUICK ACTIONS</div>
       <div className="quick-nav">
         {[
-          { label: 'Claim benefits', sub: `RM ${data.potential} available`, screen: 'benefits', color: '#22C55E' },
+          { label: 'Claim benefits', sub: `RM ${home.potential} available`, screen: 'benefits', color: '#22C55E' },
           { label: 'Ask my coach',   sub: 'Get personalised tips',          screen: 'coach',    color: '#7C3AED' },
           { label: 'View budget',    sub: `+RM ${totalClaimed} gained`,     screen: 'budget',   color: '#3B82F6' },
         ].map(a => (

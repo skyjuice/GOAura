@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './BudgetScreen.css'
+import { apiGetBudget } from '../api/goauraApi.js'
 
 const SITI_BUDGET = {
   income: 2100,
@@ -38,7 +39,25 @@ const AHMAD_BUDGET = {
 
 export default function BudgetScreen({ persona, claimed, totalClaimed }) {
   const [withBenefits, setWithBenefits] = useState(false)
-  const data = persona.id === 'siti' ? SITI_BUDGET : AHMAD_BUDGET
+  const fallback = persona.id === 'siti' ? SITI_BUDGET : AHMAD_BUDGET
+  const [data, setData] = useState(fallback)
+
+  useEffect(() => {
+    let cancelled = false
+    apiGetBudget(persona.id)
+      .then((res) => {
+        if (cancelled) return
+        if (res?.income && Array.isArray(res?.lines) && Array.isArray(res?.benefits)) {
+          setData({ income: res.income, lines: res.lines, benefits: res.benefits })
+        }
+      })
+      .catch(() => {
+        if (cancelled) return
+        setData(fallback)
+      })
+    return () => { cancelled = true }
+  }, [persona.id])
+
   const totalExpense = data.lines.reduce((a, b) => a + b.amount, 0)
   const baseRemaining = data.income - totalExpense
 

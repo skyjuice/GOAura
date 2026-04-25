@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import HomeScreen from './HomeScreen.jsx'
 import CoachScreen from './CoachScreen.jsx'
 import BenefitsScreen from './BenefitsScreen.jsx'
 import BudgetScreen from './BudgetScreen.jsx'
 import FinanceScreen from './FinanceScreen.jsx'
 import './PhoneFrame.css'
+import { apiClaimBenefit, apiGetClaims } from '../api/goauraApi.js'
 
 const TABS = [
   { id: 'home',     label: 'Home' },
@@ -26,7 +27,30 @@ export default function PhoneFrame({ persona, routeAnimation = '', onHome }) {
   const [tab, setTab] = useState('home')
   const [claimed, setClaimed] = useState({})
 
-  const claim = (id, amount) => setClaimed(prev => ({ ...prev, [id]: amount }))
+  useEffect(() => {
+    let cancelled = false
+    setClaimed({})
+    apiGetClaims(persona.id)
+      .then(({ claims }) => {
+        if (cancelled) return
+        setClaimed(claims || {})
+      })
+      .catch(() => {
+        // API might not be running yet; UI can still function in local-demo mode.
+      })
+    return () => { cancelled = true }
+  }, [persona.id])
+
+  const claim = async (id, amount) => {
+    try {
+      const res = await apiClaimBenefit(persona.id, id)
+      if (res?.claims) setClaimed(res.claims)
+      return
+    } catch {
+      // Fallback to in-memory claim when backend is unavailable.
+    }
+    setClaimed(prev => ({ ...prev, [id]: amount }))
+  }
   const totalClaimed = Object.values(claimed).reduce((a, b) => a + b, 0)
   const handleAppNav = (action) => {
     if (action === 'home') {

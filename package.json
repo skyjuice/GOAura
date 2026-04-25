@@ -5,6 +5,15 @@
   "description": "TNG HyperPersonal — financial inclusion engine for Malaysia's underserved wallet users",
   "scripts": {
     "dev": "vite",
+    "functions:install": "npm --prefix functions install",
+    "emulators": "firebase emulators:start --only firestore,functions",
+    "seed": "npm --prefix functions run seed",
+    "seed:emulator": "FIRESTORE_EMULATOR_HOST=127.0.0.1:8080 GCLOUD_PROJECT=goaura-3265d npm --prefix functions run seed",
+    "seed:cloud": "node scripts/seed-firestore-client.mjs",
+    "verify:cloud": "node scripts/verify-firestore-client.mjs",
+    "deploy:rules": "firebase deploy --only firestore:rules",
+    "deploy:functions": "firebase deploy --only functions",
+    "deploy": "firebase deploy --only firestore:rules,functions",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -15,6 +24,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.0",
+    "firebase-tools": "^13.0.0",
     "vite": "^5.0.0"
   }
 }

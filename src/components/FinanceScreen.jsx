@@ -1,5 +1,6 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import './FinanceScreen.css'
+import { apiGetFinance } from '../api/goauraApi.js'
 
 const FINANCE_DATA = {
   siti: {
@@ -73,7 +74,24 @@ function ScoreCard({ label, value, score, tone, note }) {
 
 export default function FinanceScreen({ persona, claimed, totalClaimed }) {
   const [extraData, setExtraData] = useState({ payslip: false, bank: false })
-  const data = FINANCE_DATA[persona.id] || FINANCE_DATA.siti
+  const fallback = FINANCE_DATA[persona.id] || FINANCE_DATA.siti
+  const [data, setData] = useState(fallback)
+
+  useEffect(() => {
+    let cancelled = false
+    setExtraData({ payslip: false, bank: false })
+    setData(fallback)
+    apiGetFinance(persona.id)
+      .then((res) => {
+        if (cancelled) return
+        if (res?.baseLimit && res?.boostedLimit) setData(res)
+      })
+      .catch(() => {
+        // Keep fallback demo data if backend isn't available.
+      })
+    return () => { cancelled = true }
+  }, [persona.id])
+
   const addedDataCount = Object.values(extraData).filter(Boolean).length
   const benefitLift = Math.min(250, totalClaimed * 2)
   const dataLift = addedDataCount * 300

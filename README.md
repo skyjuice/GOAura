@@ -32,10 +32,27 @@ Three layers. One wallet. Zero friction.
 
 ```bash
 npm install
+npm run seed:cloud
 npm run dev
 ```
 
 Open [http://localhost:5173](http://localhost:5173)
+
+### (Optional) Local Firebase emulators
+
+The Firestore emulator requires Java installed. If you have Java:
+
+```bash
+npm run functions:install
+npm run emulators
+```
+
+In a second terminal:
+
+```bash
+npm run seed:emulator
+npm run dev
+```
 
 ## Tech Stack
 
