@@ -53,6 +53,17 @@ In a second terminal:
 npm run seed:emulator
 npm run dev
 ```
+## Live Coach (Alibaba Cloud / DashScope)
+
+By default, the Coach runs in demo mode (canned replies). To enable a live LLM-backed Coach in dev, create `.env.local`:
+
+```bash
+DASHSCOPE_API_KEY=sk-...        # keep this secret; do not commit
+DASHSCOPE_BASE_URL=https://dashscope-intl.aliyuncs.com/compatible-mode/v1
+DASHSCOPE_MODEL=qwen-plus
+```
+
+Then restart `npm run dev`. The frontend calls a local dev-only endpoint at `POST /api/coach`, so the API key never ships to the browser.
 
 ## Tech Stack
 
