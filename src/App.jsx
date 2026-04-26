@@ -25,6 +25,8 @@ const PERSONAS = [
   },
 ]
 
+const PROFILES_URL = 'http://goaura-static-818416605706-ap-southeast-1.s3-website-ap-southeast-1.amazonaws.com/profiles/'
+
 function AppHeader({ onHome, onDashboard }) {
   return (
     <header className="app-header">
@@ -90,6 +92,10 @@ export default function App() {
     setShowGoAura(false)
   }
 
+  const openProfiles = () => {
+    window.location.href = PROFILES_URL
+  }
+
   if (!showGoAura) {
     return (
       <div className="app-root app-root-home">
@@ -105,7 +111,7 @@ export default function App() {
 
   return (
     <div className="app-root">
-      <AppHeader onHome={goHome} onDashboard={goHome} />
+      <AppHeader onHome={goHome} onDashboard={openProfiles} />
 
       <main className="app-stage">
         <PhoneFrame key={PERSONAS[persona].id} persona={PERSONAS[persona]} routeAnimation={routeAnimation} onHome={goHome} />

@@ -143,6 +143,12 @@ const AHMAD_REPLIES = {
 }
 
 const FALLBACK = "Let me check your transaction history for that... Based on your recent spending patterns, I'll personalise the best recommendation for you."
+const TEMP_DASHSCOPE_CONFIG = {
+  apiKey: 'DASHSCOPE_API_KEY_PLACEHOLDER',
+  baseUrl: 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1',
+  model: 'qwen-plus',
+}
+const COACH_API_URL = import.meta.env.VITE_COACH_API_URL || '/api/coach'
 
 export default function CoachScreen({ persona }) {
   const isSiti = persona.id === 'siti'
@@ -180,7 +186,7 @@ export default function CoachScreen({ persona }) {
         content: m.text,
       }))
 
-    const res = await fetch('/api/coach', {
+    const res = await fetch(COACH_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -236,7 +242,7 @@ export default function CoachScreen({ persona }) {
         </div>
         {liveCoachStatus === 'demo' && (
           <div className="coach-header-sub" style={{ marginTop: 6, opacity: 0.9 }}>
-            Live Coach not configured — using demo replies (set <strong>DASHSCOPE_API_KEY</strong> in <strong>.env.local</strong> and restart).
+            Live Coach not configured — using demo replies (set <strong>TEMP_DASHSCOPE_CONFIG.apiKey</strong> in <strong>.env.local</strong> and restart).
           </div>
         )}
       </div>
