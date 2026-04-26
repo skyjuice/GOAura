@@ -218,7 +218,8 @@ export default function CoachScreen({ persona }) {
       const reply = await callLiveCoach(text)
       setLiveCoachStatus('ok')
       setMessages(prev => [...prev, { from: 'ai', text: reply }])
-    } catch {
+    } catch (err) {
+      console.error('[GoAura Coach] live call failed:', err?.message || err)
       setLiveCoachStatus('demo')
       setTimeout(() => {
         const reply = replyMap[text] || FALLBACK

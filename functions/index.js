@@ -346,4 +346,50 @@ app.get('/users/:userId/finance', async (req, res) => {
   });
 });
 
+app.post('/coach', async (req, res) => {
+  const apiKey = process.env.DASHSCOPE_API_KEY || process.env.ALIBABA_API_KEY;
+  if (!apiKey) return res.status(500).json({ error: 'Missing DASHSCOPE_API_KEY in server env' });
+
+  const baseUrl = (process.env.DASHSCOPE_BASE_URL || 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1').replace(/\/$/, '');
+  const model = process.env.DASHSCOPE_MODEL || 'qwen-plus';
+
+  const persona = req.body?.persona || {};
+  const walletContext = req.body?.walletContext || {};
+  const userText = String(req.body?.text || '').trim();
+  if (!userText) return res.status(400).json({ error: 'Missing text' });
+
+  const system = [
+    "You are GOAura Coach inside Touch 'n Go eWallet (Malaysia).",
+    'Goal: give short, practical, personalised financial tips and next-best actions based on wallet spending patterns.',
+    'Be specific in RM amounts and actions (activate cashback, claim aid, set bill pay, repay micro-credit).',
+    'Formatting: start with a 1-line greeting, then 2–4 bullet points with concrete actions, then a short closing question.',
+    'Use **bold** for button/menu labels and *italics* for emphasis.',
+    `Persona: ${persona?.name || 'User'} (${persona?.badge || 'TNG user'}).`,
+    walletContext?.spendMonthly ? `Context: approx spend RM ${walletContext.spendMonthly}/month.` : null,
+    walletContext?.potentialMonthly ? `Context: potential saves RM ${walletContext.potentialMonthly}/month.` : null,
+  ].filter(Boolean).join('\n');
+
+  const messages = [
+    { role: 'system', content: system },
+    ...(Array.isArray(req.body?.history) ? req.body.history : [])
+      .filter(m => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
+      .slice(-12),
+    { role: 'user', content: userText },
+  ];
+
+  try {
+    const response = await fetch(`${baseUrl}/chat/completions`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model, messages, temperature: 0.4 }),
+    });
+    const json = await response.json().catch(() => ({}));
+    if (!response.ok) return res.status(response.status).json({ error: json?.error?.message || 'DashScope request failed' });
+    const text = json?.choices?.[0]?.message?.content;
+    res.json({ text: typeof text === 'string' ? text : '' });
+  } catch (err) {
+    res.status(500).json({ error: err?.message || 'Server error' });
+  }
+});
+
 exports.api = onRequest({ cors: true }, app);
